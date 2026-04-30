@@ -1,30 +1,49 @@
 # Loan Recovery: Payment Probability Prediction
 
-## Project Overview
-This project predicts whether a customer in loan recovery (30+ days past due) will make a payment in a given month. By identifying likely payers, recovery teams can prioritize high-probability accounts, making the collection process more efficient.
+ ->Overview
 
-## Dataset
-* **Source**: Internal loan recovery dataset.
-* **Volume**: ~348,151 account-month records.
-* **Timeline**: February 2023 – July 2023.
-* **Target Variable**: 'is_payer' (Derived from Pmt_amount).
+This project builds a machine learning model to predict whether a customer in loan recovery (30+ days past due) will make a payment in a given month.
 
-## Project Structure
-* loan_prediction.ipynb: Main Python notebook with the end-to-end ML pipeline.
-* DataDictionary.docx: Full documentation of the 27 data fields.
-* requirements.txt': List of necessary Python libraries.
-* outputs/: Folder containing visualizations and model performance charts.
+The goal is to help collection teams prioritize high-probability payers, improving recovery efficiency and reducing wasted effort.
 
-## Key Findings
-* **Class Imbalance**: Only ~9% of records resulted in a payment, requiring a stratified split and balanced weights during modeling.
-* **Top Predictors**: 'dpd_days', 'Principal_outstanding', and 'loan_age_days' were the strongest indicators of payment likelihood.
-* **Model Performance**: The Balanced Random Forest Classifier achieved an ROC-AUC of 0.79.
+-> Dataset
+Source: Internal loan recovery dataset
+Volume: ~348,000 account-month records
+Time Period: Feb 2023 – Jul 2023
+Target Variable: is_payer (derived from Pmt_amount)
+         
+-> Key Techniques & Approach
+Data Cleaning & Feature Engineering
+Removed high-missing columns (>80%)
+Handled hidden nulls (e.g., CIBIL = 0)
+Created loan_age_days feature
+Built cibil_missing_flag
+Data Leakage Prevention
+Removed post-event variables (gwo_amt, dpd_days_wo)
+Used time-based split instead of random split
+Modeling
+Logistic Regression (baseline)
+Random Forest (final model)
+Class imbalance handled using class_weight='balanced'
+Threshold Optimization
+Adjusted prediction threshold (0.3 vs 0.5)
+Improved recall to capture more potential payers
+        
+-> Model Performance
+Model	ROC-AUC
+Logistic Regression	0.75
+Random Forest	0.81
+Random Forest outperformed baseline by capturing non-linear relationships
+Threshold tuning increased recall up to ~88%
 
-## How to Run
-1. Clone this repository.
-2. Install dependencies: 'pip install -r requirements.txt'.
-3. Ensure the 'Data_6Months.csv' is in the root folder.
-4. Run 'AI_Project_Payment_Prediction.ipynb'.
+-> Key Insights
+Delinquency (dpd_days) is the strongest predictor
+Loan lifecycle (loan_age_days) significantly impacts repayment behavior
+Financial capacity features (EMI, income) have moderate influence
+Demographics have relatively low predictive power
 
-## Author
-Vaishnavi
+-> Business Impact
+Enables targeted collection strategies
+Improves recovery efficiency by focusing on likely payers
+Reduces operational cost by avoiding low-probability accounts
+Can be deployed as a payment probability scoring system
