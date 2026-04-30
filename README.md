@@ -27,4 +27,4 @@ This project predicts whether a customer in loan recovery (30+ days past due) wi
 4. Run `AI_Project_Payment_Prediction.ipynb`.
 
 ## Author
-Vaishnavi | AI Engineer | 2026
+Vaishnavi
