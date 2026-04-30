@@ -10,7 +10,7 @@ This project predicts whether a customer in loan recovery (30+ days past due) wi
 * **Target Variable**: `is_payer` (Derived from Pmt_amount)[cite: 1].
 
 ## Project Structure
-* `AI_Project_Payment_Prediction.ipynb`: Main Python notebook with the end-to-end ML pipeline[cite: 1].
+* `loan_prediction.ipynb: Main Python notebook with the end-to-end ML pipeline.[cite: 1].
 * `DataDictionary.docx`: Full documentation of the 27 data fields[cite: 1].
 * `requirements.txt`: List of necessary Python libraries[cite: 1].
 * `outputs/`: Folder containing visualizations and model performance charts[cite: 1].
